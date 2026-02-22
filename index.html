@@ -56,6 +56,9 @@
 
     <!-- Services Section -->
     <section id="services">
+        <div class="floating-3d-element" style="top: 10%; right: 5%; animation-delay: -2s;"></div>
+        <div class="floating-3d-element"
+            style="bottom: 10%; left: 5%; width: 150px; height: 150px; animation-delay: -5s;"></div>
         <div class="container">
             <div class="section-header">
                 <h2>Our <span class="gradient-text">Core Services</span></h2>
@@ -88,15 +91,11 @@
     <!-- HRMS Feature Section -->
     <section id="hrms" style="background: var(--dark-lighter);">
         <div class="container split-section">
-            <div class="split-image futuristic-preview-container" id="hrms-preview">
-                <div class="dashboard-stack">
-                    <img src="assets/admin_dashboard.png" alt="Admin Dashboard" class="dashboard-img admin-view"
-                        data-tilt>
-                    <img src="assets/employee_dashboard.png" alt="Employee Dashboard"
-                        class="dashboard-img employee-view" data-tilt>
+            <div class="split-image futuristic-preview-container" id="hrms-preview"
+                style="background: transparent; border: none;">
+                <div class="spline-container" style="position: relative; height: 500px; width: 100%;">
+                    <spline-viewer url="https://prod.spline.design/v4p6X1V-U7S30S5H/scene.splinecode"></spline-viewer>
                 </div>
-                <!-- Scanning Effect -->
-                <div class="scan-line"></div>
             </div>
             <div class="split-content">
                 <span class="badge">Featured Product</span>
