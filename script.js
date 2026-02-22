@@ -46,45 +46,54 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// NEW: Particle Wave / Starfield Background Style
+// ENHANCED: Particle Wave / Starfield Background Style
 function initRadialBurst() {
     const container = document.getElementById('radial-burst');
     if (!container) return;
 
     const colors = ['#4285F4', '#EA4335', '#FBBC04', '#34A853', '#A142F4', '#24C1E0'];
-    const markCount = 250;
+    const markCount = 300;
 
     for (let i = 0; i < markCount; i++) {
         const mark = document.createElement('div');
-        mark.className = 'color-mark';
+        const isLarge = Math.random() > 0.8;
+        mark.className = isLarge ? 'color-mark large' : 'color-mark';
 
         const angle = Math.random() * Math.PI * 2;
-        const radius = 50 + Math.random() * 500;
+        const radius = 20 + Math.random() * 600;
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
 
         mark.style.left = `calc(50% + ${x}px)`;
         mark.style.top = `calc(50% + ${y}px)`;
-        mark.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        mark.style.color = colors[Math.floor(Math.random() * colors.length)];
+        mark.style.backgroundColor = 'currentColor';
 
-        // Randomize size slightly for a "starry" feel
-        const size = 1 + Math.random() * 3;
-        mark.style.width = `${size}px`;
-        mark.style.height = `${size}px`;
+        // Multi-layered speed and movement
+        const speedFactor = isLarge ? 0.5 : 1.5;
+        const duration = (8 + Math.random() * 12) / speedFactor;
+        const delay = Math.random() * -20;
 
-        // Wavy Particle Animation
-        const duration = 5 + Math.random() * 8;
-        const delay = Math.random() * -10;
+        const floatDist = isLarge ? 40 : 80;
+
         mark.animate([
-            { transform: 'translate(0, 0) scale(1)', opacity: 0.4 },
-            { transform: `translate(${Math.sin(i) * 30}px, ${Math.cos(i) * 30}px) scale(1.5)`, opacity: 0.8 },
-            { transform: 'translate(0, 0) scale(1)', opacity: 0.4 }
+            { transform: 'translate(0, 0) scale(1)', opacity: 0 },
+            { transform: `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.5)`, opacity: isLarge ? 0.3 : 0.8, offset: 0.5 },
+            { transform: `translate(${x * 0.15}px, ${y * 0.15}px) scale(1)`, opacity: 0 }
         ], {
             duration: duration * 1000,
             iterations: Infinity,
             delay: delay * 1000,
             easing: 'ease-in-out'
         });
+
+        // Subtle shimmering
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                mark.style.opacity = '1';
+                setTimeout(() => mark.style.opacity = isLarge ? '0.4' : '0.8', 100);
+            }
+        }, 1000);
 
         container.appendChild(mark);
     }
@@ -98,9 +107,7 @@ function initTitleAnimation() {
     const text = title.innerHTML;
     title.innerHTML = '';
 
-    // Split into characters but preserve <br> tags
     const parts = text.split(/(<br>)/);
-
     parts.forEach(part => {
         if (part === '<br>') {
             title.appendChild(document.createElement('br'));
@@ -109,7 +116,7 @@ function initTitleAnimation() {
                 const span = document.createElement('span');
                 span.className = 'letter';
                 span.innerHTML = char === ' ' ? '&nbsp;' : char;
-                span.style.animationDelay = `${0.2 + (i * 0.04)}s`;
+                span.style.animationDelay = `${0.5 + (i * 0.05)}s`;
                 title.appendChild(span);
             });
         }
