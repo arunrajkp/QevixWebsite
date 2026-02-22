@@ -57,31 +57,6 @@ body {
 
 section {
     padding: 120px 0;
-    position: relative;
-}
-
-.floating-3d-element {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    z-index: -1;
-    animation: floatingOrb 10s infinite ease-in-out;
-}
-
-@keyframes floatingOrb {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-    }
-
-    50% {
-        transform: translateY(-30px) rotate(180deg) scale(1.1);
-    }
 }
 
 /* Navbar */
