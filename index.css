@@ -611,7 +611,12 @@ spline-viewer {
     }
 
     .nav-links {
-        display: none;
+        display: flex;
+        gap: 16px;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
     }
 
     .split-section {
@@ -672,6 +677,14 @@ spline-viewer {
         width: 100%;
         max-width: 280px;
         margin: 0 auto;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
     }
 
     .btn-primary,
