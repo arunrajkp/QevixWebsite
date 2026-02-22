@@ -66,17 +66,17 @@ nav {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 16px 0;
+    padding: 12px 0;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--theme-outline-variant);
     transition: all 0.3s ease;
 }
 
-.nav-content {
+.nav-links {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 24px;
+    list-style: none;
 }
 
 .logo {
@@ -129,7 +129,7 @@ nav {
     background: var(--palette-grey-20);
 }
 
-.btn-secondary {
+.btn-primary {
     background: var(--palette-grey-1200);
     color: var(--palette-grey-0);
     padding: 12px 32px;
@@ -142,8 +142,25 @@ nav {
     font-size: 1rem;
 }
 
-.btn-secondary:hover {
+.btn-primary:hover {
     background: var(--palette-grey-1000);
+}
+
+.btn-secondary {
+    background: var(--theme-surface-surface-container);
+    color: var(--theme-surface-on-surface);
+    padding: 12px 32px;
+    border-radius: var(--shape-corner-rounded);
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid var(--theme-outline-variant);
+    transition: all 0.2s;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.btn-secondary:hover {
+    background: var(--palette-grey-20);
 }
 
 /* Hero */
@@ -203,6 +220,7 @@ nav {
     display: flex;
     gap: 16px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Services */
@@ -299,6 +317,7 @@ nav {
 .dashboard-img {
     position: absolute;
     width: 85%;
+    max-width: 500px;
     border-radius: var(--shape-corner-md);
     border: 4px solid var(--palette-grey-0);
     box-shadow: 0 12px 24px rgba(33, 34, 38, 0.08);
@@ -532,25 +551,99 @@ spline-viewer {
     /* Hide any glitch wrappers to fit calm style */
 }
 
-@media (max-width: 968px) {
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 24px;
+    }
+
+    .split-section {
+        gap: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 64px 0;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
     .split-section {
         flex-direction: column;
+        text-align: center;
+    }
+
+    .futuristic-title {
+        font-size: clamp(32px, 10vw, 48px);
+        letter-spacing: -1px;
+    }
+
+    .hero-subtext {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    .futuristic-preview-container {
+        height: 350px;
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .dashboard-img {
+        width: 85%;
+    }
+
+    .admin-view {
+        transform: translateY(-15px) translateX(-15px) scale(0.95);
+    }
+
+    .employee-view {
+        transform: translateY(15px) translateX(15px) scale(1.1);
     }
 
     .contact-container {
         flex-direction: column;
-        padding: 32px;
+        padding: 40px 24px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .testimonial-card {
+        padding: 32px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .nav-cta {
+        width: 100% !important;
+        text-align: center;
+        margin-bottom: 8px;
     }
 
     .futuristic-title {
-        font-size: 56px;
+        font-size: 32px;
     }
 
-    nav {
-        width: 100%;
-        padding: 16px 24px;
-        border-radius: 0;
-        top: 0;
+    .feature-list li {
+        justify-content: center;
     }
 }
 

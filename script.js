@@ -1,12 +1,16 @@
 // Initialize Vanilla Tilt
 function initTilt() {
     if (typeof VanillaTilt !== 'undefined') {
-        VanillaTilt.init(document.querySelectorAll(".card, [data-tilt]"), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2,
-        });
+        // Disable tilt on small screens for better visibility of the 3D preview
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) {
+            VanillaTilt.init(document.querySelectorAll(".card, [data-tilt]"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.2,
+            });
+        }
     }
 }
 
