@@ -46,7 +46,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// ENHANCED: Particle Wave / Starfield Background Style
+// Particle Wave / Starfield Background Style
 function initRadialBurst() {
     const container = document.getElementById('radial-burst');
     if (!container) return;
@@ -69,12 +69,9 @@ function initRadialBurst() {
         mark.style.color = colors[Math.floor(Math.random() * colors.length)];
         mark.style.backgroundColor = 'currentColor';
 
-        // Multi-layered speed and movement
         const speedFactor = isLarge ? 0.5 : 1.5;
         const duration = (8 + Math.random() * 12) / speedFactor;
         const delay = Math.random() * -20;
-
-        const floatDist = isLarge ? 40 : 80;
 
         mark.animate([
             { transform: 'translate(0, 0) scale(1)', opacity: 0 },
@@ -87,19 +84,11 @@ function initRadialBurst() {
             easing: 'ease-in-out'
         });
 
-        // Subtle shimmering
-        setInterval(() => {
-            if (Math.random() > 0.95) {
-                mark.style.opacity = '1';
-                setTimeout(() => mark.style.opacity = isLarge ? '0.4' : '0.8', 100);
-            }
-        }, 1000);
-
         container.appendChild(mark);
     }
 }
 
-// NEW: Split text into letters for animation
+// SLOW Letter-by-letter animation with 1s initial delay
 function initTitleAnimation() {
     const title = document.getElementById('hero-title');
     if (!title) return;
@@ -108,16 +97,22 @@ function initTitleAnimation() {
     title.innerHTML = '';
 
     const parts = text.split(/(<br>)/);
+    let letterIndex = 0;
+    const baseDelay = 1.0; // 1 second hold before first letter
+    const speed = 0.12;    // Slower reveal speed (time between letters)
+
     parts.forEach(part => {
         if (part === '<br>') {
             title.appendChild(document.createElement('br'));
         } else {
-            [...part].forEach((char, i) => {
+            [...part].forEach((char) => {
                 const span = document.createElement('span');
                 span.className = 'letter';
                 span.innerHTML = char === ' ' ? '&nbsp;' : char;
-                span.style.animationDelay = `${0.5 + (i * 0.05)}s`;
+                // Calculate delay: 1s base + incremental delay for each character
+                span.style.animationDelay = `${baseDelay + (letterIndex * speed)}s`;
                 title.appendChild(span);
+                letterIndex++;
             });
         }
     });
