@@ -135,4 +135,64 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add('reveal-init');
         observer.observe(el);
     });
+
+    // ─── EmailJS Contact Form ────────────────────────────────────────────────
+    // STEP 1: Go to https://www.emailjs.com/ → sign up (free) → 
+    //         Dashboard → Email Services → Add Service (Gmail) → copy "Service ID"
+    // STEP 2: Dashboard → Email Templates → Create Template, set:
+    //         To Email = qevixinfosolutions@gmail.com
+    //         Subject  = New Inquiry from {{from_name}}
+    //         Body     = Name: {{from_name}} | Email: {{reply_to}} | Message: {{message}}
+    //         → copy "Template ID"
+    // STEP 3: Dashboard → Account → Public Key → copy it
+    // Then replace the three placeholders below:
+
+    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';   // ← paste here
+    const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';   // ← paste here
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← paste here
+
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    }
+
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusDiv = document.getElementById('form-status');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // UI: loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+            statusDiv.style.display = 'none';
+
+            const templateParams = {
+                from_name: document.getElementById('from_name').value,
+                reply_to: document.getElementById('reply_to').value,
+                message: document.getElementById('message').value,
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(() => {
+                    statusDiv.style.display = 'block';
+                    statusDiv.style.color = '#34A853';
+                    statusDiv.textContent = "✅ Message sent! We'll get back to you shortly.";
+                    contactForm.reset();
+                })
+                .catch((err) => {
+                    console.error('EmailJS error:', err);
+                    statusDiv.style.display = 'block';
+                    statusDiv.style.color = '#EA4335';
+                    statusDiv.textContent =
+                        '❌ Oops! Something went wrong. Please email us directly at qevixinfosolutions@gmail.com';
+                })
+                .finally(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                });
+        });
+    }
+    // ─────────────────────────────────────────────────────────────────────────
 });

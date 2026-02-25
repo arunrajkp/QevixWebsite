@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -198,15 +199,18 @@
                 <div class="contact-form">
                     <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" placeholder="Full Name" required>
+                            <input type="text" name="from_name" id="from_name" placeholder="Full Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Email Address" required>
+                            <input type="email" name="reply_to" id="reply_to" placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Tell us about your project" rows="5" required></textarea>
+                            <textarea name="message" id="message" placeholder="Tell us about your project" rows="5"
+                                required></textarea>
                         </div>
-                        <button type="submit" class="nav-cta" style="width: 100%;">Send Message</button>
+                        <button type="submit" id="submitBtn" class="nav-cta" style="width: 100%;">Send Message</button>
+                        <div id="form-status"
+                            style="margin-top: 1rem; font-size: 0.95rem; text-align:center; display:none;"></div>
                     </form>
                 </div>
             </div>
